@@ -1,5 +1,163 @@
-<!doctype html>
-<head>
+<!DOCTYPE HTML>
+<meta charset="utf-8"/>
+<title>EDU STORAGE</title>
+<link rel="shortcut icon" href="images/icon.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<head id = "head">
+	<style type="text/css">
+		.menu{
+			height: auto;
+			border-style: solid;
+			border-color: rgb(220,220,220);
+			background: rgb(245,245,245);
+			padding: 10px;
+			border-width: 2px;
+			margin: 34px;
+			transition-duration: .3s;
+		}
+		.btn_ico{
+			border: 0;
+			outline: 0;
+			background: none;
+			transition-duration: .2s;
+		}
+		.btn_ico:hover{
+			filter: contrast(40%);
+			cursor: pointer;
+			transition-duration: .2s;
+		}
+		.in1{
+			outline: 0;
+			border-style: solid;
+			border-width: 0.6pt;
+			border-color: #adadad;
+			width: 160pt;
+			transition-duration: .2s;
+		}
+		.in1:hover{
+			border-color: black;
+			transition-duration: .2s;
+		}
+		.btn1{
+			border: 0;
+			outline: 0;
+			width: auto;
+			border-style: solid;
+			border-color: #adadad;
+			border-width: 0.6pt;
+			background-color: white;
+			transition-duration: .2s;
+		}
+		.btn1:hover{
+			background-color: rgb(240,240,240);
+			cursor: pointer;
+			transition-duration: .2s;
+		}
+		.line{
+			font-size: 8pt;
+			border: 0;
+			outline: 0;
+			background-color: rgba(0,0,0,0);
+		}
+		.theme{
+			font-size: 8pt;
+			border: 0;
+			outline: 0;
+			background-color: rgba(0,0,0,0);
+			color: rgb(23, 23, 23);
+			font-weight: bolder;
+			transition-duration: .2s;
+		}
+		.theme:hover{
+			cursor: pointer;
+			transition-duration: .2s;
+		}
+		.a{
+			font-weight: bolder;
+			color: black;
+			text-decoration: none;
+		}
+		.a:hover{
+			color: blue;
+			text-decoration: none;
+		}
+	</style>
+	<br>
+	<ul class = "menu" style="">
+		<a href="#mid1" class = 'a'>중1</a>
+		<a href="#mid2" class = 'a'>2</a>
+		<a href="#mid3" class = 'a'>3</a>
+		/
+		<a href="#high1" class = 'a'>고1</a>
+		<a href="#high2" class = 'a'>2</a>
+		<a href="#high3" class = 'a'>3</a>
+		<br>
+		<br>
+		<input type="button" name="" value="검색" onclick="search()">
+		<h5 hidden="hidden" id = 'msg' style="color: red">검색어를 찾을 수 없습니다.</h5>
+	</ul>
+	<body>
+		<br>
+		<br>
+		<div>
+			<li style="color: black; list-style: none; line-height: 6pt;">
+				<style type="text/css">
+					.feed{
+						color: black;
+						text-decoration: none;
+					}
+					.feed:hover{
+						color: blue;
+						text-decoration: underline;
+					}
+				</style>
+				<script type="text/javascript">
+					const alist = ["거듭제곱", "소수와-space-합성수", "소인수분해", "최소공배수와-space-최대공약수", "정수와-space-유리수", "수직선", "절댓값", "수의-space-대소-space-관계", "부등호의-space-사용", "유리수의-space-덧셈과-space-뺄셈", "유리수의-space-곱셈과-space-나눗셈", "유리수의-space-혼합계산", "문자를-space-사용한-space-식", "곱셈과-space-나눗셈-space-기호의-space-생략", "식의-space-값", "다항식과-space-일차식", "일차식의-space-계산", "등식과-space-방정식", "등식의-space-성질", "일차방정식의-space-풀이", "순서쌍과-space-좌표평면", "정비례,-space-반비례와-space-그래프", "text", "text2"];
+					var list = alist.slice(0,22);
+					var list2 = alist.slice(22,24);
+					var i = 0;
+					var lst = "";
+					document.write("<ul class = 'ul' id = 'mid1'><h3>중 1학년</h3>");
+					while(i<list.length){
+						var title = list[i];
+						title = title.replace(/-space-/g, " ");
+						document.write("<a href = '' style = '' id = '"+list[i]+"' class = 'feed' width = '10%'><h4>"+(i+1)+". "+title+"</h4></a>");
+						i++;
+					}
+					document.write("</ul><br>");
+					document.write("<ul class = 'ul' id = 'mid2'><h3>중 2학년</h3>");
+					var j = 0;
+					while(j<list2.length){
+						var title = list2[j];
+						title = title.replace(/-space-/g, " ");
+						document.write("<a href = '' style = '' id = '"+list2[j]+"' class = 'feed' width = '10%'><h4>"+(j+1)+". "+title+"</h4></a>");
+						j++;
+					}
+					document.write("</ul>");
+				</script>
+				<script type="text/javascript">
+					function search(){
+						var a = prompt("검색어를 입력해 주세요.");
+						var j = 0;
+						while(j<alist.length){
+							if(alist[j].includes(a.replace(/ /g, "-space-"))||a.replace(/ /g, "-space-").includes(alist[j])){
+								a = alist[j];
+								break;
+							}
+							j++;
+						} 
+						if(alist.indexOf(a.replace(/ /g, "-space-"))==-1&&a!=null){
+							$("#msg").show();
+						}else{
+							location.href = "#"+a.replace(/ /g, "-space-");
+							$("#msg").hide();
+							if(lst!="") $("#"+lst).css("color", "");
+							$(("#"+(a.replace(/ /g, "-space-")))).css("color", "red");
+							lst = a.replace(/ /g, "-space-");
+						}
+					}
+				</script>
+			</li>
+		</div>
+	</body>
 </head>
-<body>
-</body>
